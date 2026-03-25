@@ -1,17 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sunburst Truck Lines</title>
-  <style>
-    body { margin:0; background:#000; height:100vh; display:flex; justify-content:center; align-items:center; overflow:hidden; }
-    video { max-width:100%; max-height:100vh; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superb Detail</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; }
+  #scroll-container { height: 600vh; position: relative; }
+  #sticky-canvas-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  canvas { max-width: 100%; max-height: 100vh; object-fit: contain; }
+</style>
 </head>
 <body>
-  <video autoplay loop muted playsinline>
-    <source src="video.mp4" type="video/mp4">
-  </video>
+<div id="scroll-container">
+  <div id="sticky-canvas-wrapper">
+    <canvas id="frame-canvas"></canvas>
+  </div>
+</div>
+<script>
+const TOTAL = 150;
+const FRAMES = Array.from({length: TOTAL}, (_, i) => 
+  `frames/frame_${String(i+1).padStart(4,'0')}.jpg`
+);
+
+const canvas = document.getElementById('frame-canvas');
+const ctx = canvas.getContext('2d');
+const container = document.getElementById('scroll-container');
+const images = new Array(TOTAL);
+let current = 0;
+
+const img0 = new Image();
+img0.onload = () => {
+  canvas.width = img0.naturalWidth;
+  canvas.height = img0.naturalHeight;
+  ctx.drawImage(img0, 0, 0);
+};
+img0.src = FRAMES[0];
+images[0] = img0;
+
+for (let i = 1; i < TOTAL; i++) {
+  const img = new Image();
+  img.src = FRAMES[i];
+  images[i] = img;
+}
+
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const scrollFraction = Math.min(Math.max(window.scrollY / (container.scrollHeight - window.innerHeight), 0), 1);
+      const index = Math.min(Math.floor(scrollFraction * (TOTAL - 1)), TOTAL - 1);
+      if (index !== current && images[index]?.complete) {
+        current = index;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(images[index], 0, 0);
+      }
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+</script>
 </body>
 </html>
