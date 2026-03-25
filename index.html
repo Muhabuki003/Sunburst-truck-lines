@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:;">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sunburst Truck Lines — Houston's Premier Intermodal Carrier</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +32,6 @@
     cursor: none;
   }
 
-  /* CUSTOM CURSOR */
   .cursor {
     position: fixed;
     width: 10px;
@@ -55,7 +55,6 @@
     transition: transform 0.12s ease-out, width 0.2s, height 0.2s;
   }
 
-  /* NAV */
   nav {
     position: fixed;
     top: 0;
@@ -126,7 +125,6 @@
 
   .nav-cta:hover { background: var(--orange); }
 
-  /* HERO SCROLL SECTION */
   #hero-scroll {
     height: 600vh;
     position: relative;
@@ -148,7 +146,6 @@
     object-position: center;
   }
 
-  /* Dark overlay on video */
   #hero-overlay {
     position: absolute;
     inset: 0;
@@ -162,7 +159,6 @@
     z-index: 1;
   }
 
-  /* HERO TEXT STAGES */
   #hero-text {
     position: absolute;
     inset: 0;
@@ -250,7 +246,271 @@
 
   .hero-cta:hover { background: var(--orange); gap: 24px; }
 
-  /* SCROLL INDICATOR */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+
+  .scroll-indicator span {
+    font-family: 'DM Mono
+cat > ~/Desktop/sunburst-truck-lines/index.html << 'ENDOFFILE'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunburst Truck Lines — Houston's Premier Intermodal Carrier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F5A623;
+    --orange: #E8601C;
+    --black: #080808;
+    --dark: #111010;
+    --mid: #1C1B1B;
+    --steel: #2A2929;
+    --white: #F2EDE6;
+    --muted: #7A756E;
+    --accent: #F5A623;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(245,166,35,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s ease-out, width 0.2s, height 0.2s;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 28px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    mix-blend-mode: normal;
+  }
+
+  nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.9) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+
+  .nav-logo span {
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 48px;
+    list-style: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    position: relative;
+    z-index: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .nav-cta:hover { background: var(--orange); }
+
+  #hero-scroll {
+    height: 600vh;
+    position: relative;
+  }
+
+  #hero-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(8,8,8,0.3) 0%,
+      rgba(8,8,8,0.1) 40%,
+      rgba(8,8,8,0.6) 80%,
+      rgba(8,8,8,1) 100%
+    );
+    z-index: 1;
+  }
+
+  #hero-text {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 56px;
+  }
+
+  .hero-stage {
+    position: absolute;
+    left: 56px;
+    right: 56px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+  }
+
+  .hero-stage.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 10vw, 140px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    max-width: 800px;
+  }
+
+  .hero-headline .highlight {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(242,237,230,0.6);
+    margin-top: 28px;
+    max-width: 420px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: background 0.3s, gap 0.3s;
+  }
+
+  .hero-cta:hover { background: var(--orange); gap: 24px; }
+
   .scroll-indicator {
     position: absolute;
     bottom: 40px;
@@ -285,7 +545,6 @@
     50% { opacity: 1; transform: scaleY(1.2); }
   }
 
-  /* PROGRESS BAR */
   #progress-bar {
     position: fixed;
     top: 0;
@@ -297,7 +556,6 @@
     transition: width 0.1s;
   }
 
-  /* TICKER */
   .ticker-wrap {
     background: var(--gold);
     overflow: hidden;
@@ -331,7 +589,6 @@
     to { transform: translateX(-50%); }
   }
 
-  /* ABOUT SECTION */
   #about {
     padding: 140px 56px;
     display: grid;
@@ -431,7 +688,6 @@
     margin-top: 8px;
   }
 
-  /* SERVICES */
   #services {
     padding: 140px 56px;
     background: var(--dark);
@@ -510,7 +766,6 @@
     font-weight: 300;
   }
 
-  /* COVERAGE */
   #coverage {
     padding: 140px 56px;
     background: var(--black);
@@ -537,15 +792,6 @@
     background: 
       radial-gradient(circle at 30% 60%, rgba(245,166,35,0.15) 0%, transparent 50%),
       radial-gradient(circle at 70% 30%, rgba(232,96,28,0.08) 0%, transparent 40%);
-  }
-
-  .route-line {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: linear-gradient(to right, var(--gold), var(--orange), transparent);
   }
 
   .route-city {
@@ -627,7 +873,65 @@
     flex-shrink: 0;
   }
 
-  /* CTA SECTION */
+  #fleet-scroll {
+    height: 400vh;
+    position: relative;
+  }
+
+  #fleet-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #fleet-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #fleet-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(8,8,8,0.4) 0%,
+      rgba(8,8,8,0.1) 40%,
+      rgba(8,8,8,0.7) 100%
+    );
+    z-index: 1;
+  }
+
+  #fleet-text {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 56px;
+  }
+
+  .fleet-stage {
+    position: absolute;
+    left: 56px;
+    right: 56px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+  }
+
+  .fleet-stage.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
   #cta {
     padding: 160px 56px;
     background: var(--gold);
@@ -708,7 +1012,6 @@
 
   .btn-outline:hover { background: var(--black); color: var(--gold); }
 
-  /* FOOTER */
   footer {
     background: var(--dark);
     padding: 80px 56px 40px;
@@ -782,7 +1085,6 @@
 
   .footer-copy span { color: var(--gold); }
 
-  /* REVEAL ANIMATIONS */
   .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -801,14 +1103,11 @@
 </head>
 <body>
 
-<!-- CUSTOM CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- PROGRESS BAR -->
 <div id="progress-bar"></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">SUNBURST<span>.</span></div>
   <ul class="nav-links">
@@ -820,13 +1119,11 @@
   <a href="tel:7136721027" class="nav-cta">713-672-1027</a>
 </nav>
 
-<!-- HERO SCROLL -->
 <section id="hero-scroll">
   <div id="hero-sticky">
     <img id="hero-canvas" src="" alt="Sunburst Truck Lines">
     <div id="hero-overlay"></div>
 
-    <!-- STAGE 1 -->
     <div class="hero-stage active" id="stage-1">
       <div class="hero-eyebrow">Houston's Premier Carrier — Est. 1989</div>
       <h1 class="hero-headline">
@@ -838,7 +1135,6 @@
       <a href="#about" class="hero-cta">Discover Our Story →</a>
     </div>
 
-    <!-- STAGE 2 -->
     <div class="hero-stage" id="stage-2">
       <div class="hero-eyebrow">Port Drayage & Rail Intermodal</div>
       <h1 class="hero-headline">
@@ -850,7 +1146,6 @@
       <a href="#services" class="hero-cta">Our Services →</a>
     </div>
 
-    <!-- STAGE 3 -->
     <div class="hero-stage" id="stage-3">
       <div class="hero-eyebrow">Houston · Dallas · Savannah</div>
       <h1 class="hero-headline">
@@ -862,7 +1157,6 @@
       <a href="#coverage" class="hero-cta">View Coverage →</a>
     </div>
 
-    <!-- STAGE 4 -->
     <div class="hero-stage" id="stage-4">
       <div class="hero-eyebrow">Get a Quote Today</div>
       <h1 class="hero-headline">
@@ -873,7 +1167,6 @@
       <a href="#cta" class="hero-cta">Request a Quote →</a>
     </div>
 
-    <!-- SCROLL INDICATOR -->
     <div class="scroll-indicator" id="scroll-indicator">
       <span>Scroll</span>
       <div class="scroll-line"></div>
@@ -881,7 +1174,6 @@
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker-track">
     <span class="ticker-item">Port of Houston <span class="ticker-dot">◆</span></span>
@@ -892,7 +1184,6 @@
     <span class="ticker-item">Savannah Georgia <span class="ticker-dot">◆</span></span>
     <span class="ticker-item">35+ Years Serving Texas <span class="ticker-dot">◆</span></span>
     <span class="ticker-item">Licensed & Insured <span class="ticker-dot">◆</span></span>
-    <!-- duplicate for seamless loop -->
     <span class="ticker-item">Port of Houston <span class="ticker-dot">◆</span></span>
     <span class="ticker-item">Intermodal Freight <span class="ticker-dot">◆</span></span>
     <span class="ticker-item">Port of Freeport <span class="ticker-dot">◆</span></span>
@@ -904,7 +1195,6 @@
   </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
   <div>
     <div class="section-label reveal">About Sunburst</div>
@@ -941,7 +1231,6 @@
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="services-header">
     <div>
@@ -974,7 +1263,6 @@
   </div>
 </section>
 
-<!-- COVERAGE -->
 <section id="coverage">
   <div class="coverage-inner">
     <div class="coverage-visual reveal">
@@ -990,7 +1278,6 @@
         <div class="dot"></div>
         <span class="city-name">Savannah</span>
       </div>
-      <!-- Route lines SVG -->
       <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 500 500" preserveAspectRatio="none">
         <defs>
           <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1021,7 +1308,25 @@
   </div>
 </section>
 
-<!-- CTA -->
+<section id="fleet-scroll">
+  <div id="fleet-sticky">
+    <img id="fleet-canvas" src="" alt="Sunburst Fleet">
+    <div id="fleet-overlay"></div>
+    
+    <div id="fleet-text">
+      <div class="fleet-stage active" id="fleet-stage-1">
+        <div class="hero-eyebrow">Our Fleet</div>
+        <h1 class="hero-headline">
+          <span class="highlight">Nationwide</span>
+          Coverage
+        </h1>
+        <p class="hero-sub">From coast to coast, our fleet delivers your freight on time, every time. 24/7 dispatch, real-time tracking, and dedicated drivers.</p>
+        <a href="#cta" class="hero-cta">Join Our Fleet →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="cta">
   <h2 class="cta-heading reveal">Let's Move<br>Your Freight</h2>
   <p class="cta-sub reveal reveal-delay-1">Our Houston dispatch team is standing by 24/7. Get a quote in minutes and your cargo moving by morning.</p>
@@ -1031,7 +1336,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div>
@@ -1073,7 +1377,6 @@
 </footer>
 
 <script>
-// ─── CURSOR ───────────────────────────────────────
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -1093,13 +1396,11 @@ function animateRing() {
 }
 animateRing();
 
-// ─── LOAD FRAMES ─────────────────────────────────
 const heroCanvas = document.getElementById('hero-canvas');
 const frameCount = 145;
 const frames = [];
 let framesLoaded = 0;
 
-// Preload all frames
 for (let i = 1; i <= frameCount; i++) {
   const img = new Image();
   const num = String(i).padStart(4, '0');
@@ -1108,10 +1409,8 @@ for (let i = 1; i <= frameCount; i++) {
   frames.push(img);
 }
 
-// Set first frame immediately
 heroCanvas.src = `frames/frame_0001.jpg`;
 
-// ─── HERO SCROLL ANIMATION ───────────────────────
 const heroSection = document.getElementById('hero-scroll');
 const stages = document.querySelectorAll('.hero-stage');
 const scrollIndicator = document.getElementById('scroll-indicator');
@@ -1129,7 +1428,6 @@ function getHeroProgress() {
 function updateHero() {
   const progress = getHeroProgress();
 
-  // Update frame
   const frameIndex = Math.min(
     Math.floor(progress * frameCount),
     frameCount - 1
@@ -1138,7 +1436,6 @@ function updateHero() {
     heroCanvas.src = frames[frameIndex].src;
   }
 
-  // Update stages
   let activeStage = 0;
   for (let i = stageBreakpoints.length - 1; i >= 0; i--) {
     if (progress >= stageBreakpoints[i]) {
@@ -1151,14 +1448,46 @@ function updateHero() {
     s.classList.toggle('active', i === activeStage);
   });
 
-  // Hide scroll indicator after first scroll
   scrollIndicator.style.opacity = progress > 0.05 ? '0' : '1';
 
-  // Progress bar — only hero section
   progressBar.style.width = (progress * 100) + '%';
 }
 
-// ─── REVEAL ON SCROLL ────────────────────────────
+const fleetCanvas = document.getElementById('fleet-canvas');
+const fleetSection = document.getElementById('fleet-scroll');
+const fleetFrameCount = 150;
+const fleetFrames = [];
+
+for (let i = 1; i <= fleetFrameCount; i++) {
+  const img = new Image();
+  const num = String(i).padStart(4, '0');
+  img.src = `frames-fleet/frame_${num}.jpg`;
+  fleetFrames.push(img);
+}
+
+fleetCanvas.src = `frames-fleet/frame_0001.jpg`;
+
+function getFleetProgress() {
+  const rect = fleetSection.getBoundingClientRect();
+  const totalScroll = fleetSection.offsetHeight - window.innerHeight;
+  const scrolled = -rect.top;
+  return Math.max(0, Math.min(1, scrolled / totalScroll));
+}
+
+function updateFleet() {
+  const progress = getFleetProgress();
+  
+  if (progress > 0 && progress < 1) {
+    const frameIndex = Math.min(
+      Math.floor(progress * fleetFrameCount),
+      fleetFrameCount - 1
+    );
+    if (fleetFrames[frameIndex] && fleetFrames[frameIndex].complete) {
+      fleetCanvas.src = fleetFrames[frameIndex].src;
+    }
+  }
+}
+
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -1170,8 +1499,10 @@ const observer = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => observer.observe(el));
 
-// ─── SCROLL LISTENER ─────────────────────────────
-window.addEventListener('scroll', updateHero, { passive: true });
+window.addEventListener('scroll', () => {
+  updateHero();
+  updateFleet();
+}, { passive: true });
 updateHero();
 </script>
 </body>
