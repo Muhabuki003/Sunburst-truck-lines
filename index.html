@@ -261,271 +261,6 @@
   }
 
   .scroll-indicator span {
-    font-family: 'DM Mono
-cat > ~/Desktop/sunburst-truck-lines/index.html << 'ENDOFFILE'
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:;">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virdi Transport — Cypress, TX Trucking</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #F5A623;
-    --orange: #E8601C;
-    --black: #080808;
-    --dark: #111010;
-    --mid: #1C1B1B;
-    --steel: #2A2929;
-    --white: #F2EDE6;
-    --muted: #7A756E;
-    --accent: #F5A623;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  .cursor {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s, width 0.2s, height 0.2s;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px;
-    height: 36px;
-    border: 1px solid rgba(245,166,35,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.12s ease-out, width 0.2s, height 0.2s;
-  }
-
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    padding: 28px 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    mix-blend-mode: normal;
-  }
-
-  nav::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(8,8,8,0.9) 0%, transparent 100%);
-    pointer-events: none;
-  }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 0.12em;
-    color: var(--white);
-    position: relative;
-    z-index: 1;
-  }
-
-  .nav-logo span {
-    color: var(--gold);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 48px;
-    list-style: none;
-    position: relative;
-    z-index: 1;
-  }
-
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
-
-  .nav-cta {
-    position: relative;
-    z-index: 1;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--gold);
-    padding: 12px 28px;
-    text-decoration: none;
-    transition: background 0.3s;
-  }
-
-  .nav-cta:hover { background: var(--orange); }
-
-  #hero-scroll {
-    height: 600vh;
-    position: relative;
-  }
-
-  #hero-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  #hero-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  #hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(8,8,8,0.3) 0%,
-      rgba(8,8,8,0.1) 40%,
-      rgba(8,8,8,0.6) 80%,
-      rgba(8,8,8,1) 100%
-    );
-    z-index: 1;
-  }
-
-  #hero-text {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 56px;
-  }
-
-  .hero-stage {
-    position: absolute;
-    left: 56px;
-    right: 56px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    pointer-events: none;
-  }
-
-  .hero-stage.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .hero-headline {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 10vw, 140px);
-    line-height: 0.92;
-    letter-spacing: 0.02em;
-    color: var(--white);
-    max-width: 800px;
-  }
-
-  .hero-headline .highlight {
-    color: var(--gold);
-    display: block;
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    color: rgba(242,237,230,0.6);
-    margin-top: 28px;
-    max-width: 420px;
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 40px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--gold);
-    padding: 16px 36px;
-    text-decoration: none;
-    transition: background 0.3s, gap 0.3s;
-  }
-
-  .hero-cta:hover { background: var(--orange); gap: 24px; }
-
-  .scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    opacity: 1;
-    transition: opacity 0.5s;
-  }
-
-  .scroll-indicator span {
     font-family: 'DM Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.3em;
@@ -1099,6 +834,122 @@ cat > ~/Desktop/sunburst-truck-lines/index.html << 'ENDOFFILE'
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ===== RESPONSIVE / MOBILE ===== */
+
+  @media (hover: none) {
+    .cursor, .cursor-ring { display: none; }
+    body { cursor: auto; }
+  }
+
+  @media (max-width: 1024px) {
+    nav { padding: 20px 32px; }
+    .nav-links { gap: 24px; }
+
+    #hero-text { padding: 0 32px; }
+    .hero-stage { left: 32px; right: 32px; }
+    #fleet-text { padding: 0 32px; }
+    .fleet-stage { left: 32px; right: 32px; }
+
+    #about { padding: 100px 32px; gap: 60px; }
+    #services { padding: 100px 32px; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    #coverage { padding: 100px 32px; }
+    .coverage-inner { gap: 60px; }
+    #cta { padding: 120px 32px; }
+    footer { padding: 60px 32px 32px; }
+  }
+
+  @media (max-width: 768px) {
+    /* Navigation */
+    nav { padding: 18px 20px; }
+    .nav-links { display: none; }
+    .nav-cta { padding: 10px 20px; font-size: 10px; }
+
+    /* Hero */
+    #hero-text { padding: 0 20px; align-items: flex-end; padding-bottom: 80px; }
+    .hero-stage { left: 20px; right: 20px; }
+    .hero-headline { font-size: clamp(44px, 11vw, 80px); }
+    .hero-sub { font-size: 14px; margin-top: 16px; max-width: 100%; }
+    .hero-cta { margin-top: 24px; padding: 14px 28px; font-size: 11px; }
+
+    /* Fleet */
+    #fleet-text { padding: 0 20px; align-items: flex-end; padding-bottom: 80px; }
+    .fleet-stage { left: 20px; right: 20px; }
+
+    /* About */
+    #about {
+      padding: 72px 20px;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .about-heading { font-size: clamp(44px, 10vw, 72px); }
+    .stats-row { grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 40px; }
+    .stat-block { padding: 24px 16px; }
+    .stat-number { font-size: 40px; }
+
+    /* Services */
+    #services { padding: 72px 20px; }
+    .services-header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 48px;
+    }
+    .services-header p { max-width: 100% !important; }
+    .services-heading { font-size: clamp(44px, 10vw, 72px); }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 40px 28px; }
+
+    /* Coverage */
+    #coverage { padding: 72px 20px; }
+    .coverage-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .coverage-visual { height: 260px; }
+    .coverage-heading { font-size: clamp(44px, 10vw, 72px); }
+
+    /* CTA */
+    #cta { padding: 100px 20px; }
+    .cta-heading { font-size: clamp(44px, 10vw, 96px); }
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .btn-dark, .btn-outline {
+      text-align: center;
+      padding: 18px 32px;
+    }
+
+    /* Footer */
+    footer { padding: 56px 20px 32px; }
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    nav { padding: 16px 16px; }
+    .nav-logo { font-size: 22px; }
+    .nav-cta { padding: 9px 16px; font-size: 9px; letter-spacing: 0.12em; }
+
+    .hero-headline { font-size: clamp(38px, 12vw, 60px); }
+
+    .stats-row { grid-template-columns: 1fr; }
+    .stat-block { padding: 20px 20px; }
+
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-col:first-child { grid-column: 1; }
+  }
+
 </style>
 </head>
 <body>
